@@ -15,12 +15,12 @@ class GraphicsPanel:
         tile_map = {}
         for x in range(0, x_dim):
             for y in range(0, y_dim):
-                tile_map[Point(x, y)] = "white"
+                tile_map[Point(x, y)] = "black"
         return GraphicsPanel(tile_map)
 
     def reset(self):
         for point in self.tiles.keys():
-            self.update_canvas(point, "white")
+            self.update_canvas(point, "black")
 
     def update_canvas_with_offset(self, point, color, x_offset, y_offset):
         normalised_point = Point(x_offset + point.x, y_offset + point.y)
@@ -60,4 +60,4 @@ class GraphicsPanel:
         self.canvas.itemconfigure(self.text_component, text=text)
 
 
-GAME_SCALE = 5
+GAME_SCALE = 10
