@@ -193,7 +193,7 @@ def part1():
         return key_path_map
 
     def process_lines():
-        lines = open("testinput.txt", "r").read().splitlines()
+        lines = open("input.txt", "r").read().splitlines()
         for y, line in enumerate(lines):
             chars = list(line)
             for x, char in enumerate(chars):
@@ -255,7 +255,8 @@ def part1():
                 next_next_droid = next_paths[next_path_key]
                 next_next_doors = next_next_droid.doors
                 if have_all_keys(next_next_doors, collected_keys):
-                    additional_path = next_next_droid.path
+                    next_next_droid = next_next_droid.clone(next_next_droid.direction)
+                    additional_path = list(next_next_droid.path)
                     next_next_droid.path = list(next_droid.path)
                     next_next_droid.path.extend(additional_path)
 
@@ -267,14 +268,15 @@ def part1():
                     next_next_droid.doors = next_droid.doors.copy()
                     next_next_droid.doors.update(additional_doors)
 
-                    # print(len(next_next_droid.keys))
+                    print(len(next_next_droid.keys))
                     if len(next_next_droid.keys) == len(keys):
                         print(len(next_next_droid.path))
-                        for point in next_next_droid.path:
-                            print(point)
+                        # for point in next_next_droid.path:
+                        #     print(point)
                         print(list(map(lambda key: key.char, next_next_droid.keys.keys())))
                         print("\n\n")
                         complete_paths.append(next_next_droid.path)
+                        return
 
                     next_next_droids.append(next_next_droid)
 
